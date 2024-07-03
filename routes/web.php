@@ -9,7 +9,7 @@ use App\Http\Controllers\Welcome\ShowRecetteController as WelcomeShowRecetteCont
 Route::get('/', IndexController::class)-> name('index');
 Route::get('/home', IndexController::class)-> name('index');
 
-Route::get('recette/{recette:id}', WelcomeShowRecetteController::class)->name('recette');
+Route::get('show/{recette:id}', WelcomeShowRecetteController::class)->name('show');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -17,7 +17,7 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware('auth')->group(function() {
     Route::get('recettes', ShowListRecetteController::class)->name('recettes');
-    Route::get('recette', ShowRecetteController::class);
+    Route::get('recette/{recette:id}', ShowRecetteController::class)->name('recette');
 });
 
 Route::view('profile', 'profile')

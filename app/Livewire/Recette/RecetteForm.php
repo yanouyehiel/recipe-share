@@ -15,7 +15,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\HasManyRepeater;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
@@ -34,6 +34,7 @@ class RecetteForm extends Component implements HasForms
     public string|int $cookingTime;
     public string $created_at;
     public string $updated_at;
+    public string|null $image;
     public Recette $recette;
     public int|null $recetteId;
     public $etapes;
@@ -47,6 +48,7 @@ class RecetteForm extends Component implements HasForms
         $this->cookingTime = $recette->cookingTime;
         $this->created_at = $recette->created_at;
         $this->updated_at = $recette->updated_at;
+        $this->image = $recette->image;
         $this->recette = $recette;
         $this->recetteId = $recette->id;
 
@@ -58,6 +60,9 @@ class RecetteForm extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('nom'),
+                FileUpload::make('image')
+                    ->image()
+                    ->imageEditor(),
                 Section::make("Timing")
                     ->description("Les différents timings pour votre reccette")
                     ->schema([
@@ -70,8 +75,8 @@ class RecetteForm extends Component implements HasForms
                             ->hint("En min")
                             ->hintColor('primary'),
                     ])->columns(2),
-                //RichEditor::make('description'),
-                Textarea::make('description'),
+                RichEditor::make('description'),
+                //Textarea::make('description'),
                 DateTimePicker::make('created_at')->label("Date de création")->disabled(),
                 DateTimePicker::make('updated_at')->label("Date de mise à jour")->disabled(),
                 Section::make("Les étapes")
@@ -79,8 +84,9 @@ class RecetteForm extends Component implements HasForms
                     ->schema([
                         Repeater::make("etapes")
                             ->schema([
-                                Textarea::make('description')->label('Etape')
+                                Textarea::make('description')->label('Etape')->required()
                             ])
+                            ->orderable()
                     ])
             ]);
     }

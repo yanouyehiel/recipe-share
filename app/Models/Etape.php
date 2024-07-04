@@ -11,6 +11,12 @@ class Etape extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $casts = [
+        'etapes' => 'array',
+    ];
+    protected $fillable = [
+        'description', 'sort', 'recette_id'
+    ];
 
     public function recette(): BelongsTo
     {

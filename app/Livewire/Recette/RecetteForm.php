@@ -35,6 +35,7 @@ class RecetteForm extends Component implements HasForms
     public string $created_at;
     public string $updated_at;
     public string|null $image;
+    public string|null $video;
     public Recette $recette;
     public int|null $recetteId;
     public $etapes;
@@ -49,6 +50,7 @@ class RecetteForm extends Component implements HasForms
         $this->created_at = $recette->created_at;
         $this->updated_at = $recette->updated_at;
         $this->image = $recette->image;
+        $this->video = $recette->video;
         $this->recette = $recette;
         $this->recetteId = $recette->id;
 
@@ -60,9 +62,15 @@ class RecetteForm extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('nom'),
-                FileUpload::make('image')
-                    ->image()
-                    ->imageEditor(),
+                Section::make("Présentation")
+                    ->schema([
+                        FileUpload::make('image')
+                            ->image()
+                            ->imageEditor(),
+                        FileUpload::make('video'),
+                            //->image()
+                            //->imageEditor(),
+                    ])->columns(2),
                 Section::make("Timing")
                     ->description("Les différents timings pour votre reccette")
                     ->schema([
@@ -84,9 +92,14 @@ class RecetteForm extends Component implements HasForms
                     ->schema([
                         Repeater::make("etapes")
                             ->schema([
-                                Textarea::make('description')->label('Etape')->required()
+                                Textarea::make('description')->label('Etape')
                             ])
-                            ->orderable()
+                            //->reorderable(true)
+                            //->collapsible()
+                            ->cloneable()
+                            ->reorderableWithButtons()
+                            ->addActionLabel('Ajouter une tâche')
+                            ->orderColumn('sort')
                     ])
             ]);
     }

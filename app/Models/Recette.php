@@ -12,6 +12,12 @@ class Recette extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $casts = [
+        'etapes' => 'json',
+    ];
+    protected $fillable = [
+        'nom', 'image', 'video', 'description', 'preparationTime', 'cookingTime', 'nbCalories', 'difficulte'
+    ];
 
     public function user(): BelongsTo
     {

@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class RecetteUser extends Pivot
 {
     use HasFactory;
+    protected $guarded = [];
 }

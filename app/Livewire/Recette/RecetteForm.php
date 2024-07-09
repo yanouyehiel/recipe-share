@@ -16,10 +16,14 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\HasManyRepeater;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RecetteForm extends Component implements HasForms
 {
@@ -34,12 +38,14 @@ class RecetteForm extends Component implements HasForms
     public string|int $cookingTime;
     public string $created_at;
     public string $updated_at;
-    public string|null $image;
-    public string|null $video;
+    public array|null $image;
+    public array|null|string $video;
     public Recette $recette;
     public int|null $recetteId;
-    public $etapes;
+    public object|array|null|string $etapes;
     public string|null $descTache = null;
+    public string $nbCalories;
+    public string $difficulte;
 
     public function mount(Recette $recette): void
     {
@@ -49,12 +55,15 @@ class RecetteForm extends Component implements HasForms
         $this->cookingTime = $recette->cookingTime;
         $this->created_at = $recette->created_at;
         $this->updated_at = $recette->updated_at;
-        $this->image = $recette->image;
-        $this->video = $recette->video;
+        $this->image[] = $recette->image;
+        $this->video[] = $recette->video;
         $this->recette = $recette;
         $this->recetteId = $recette->id;
-
+        $this->nbCalories = $recette->nbCalories;
+        $this->difficulte = $recette->difficulte;
+        
         $this->etapes = $recette->etapes()->get();
+        
     }
  
     public function form(Form $form): Form
@@ -65,11 +74,13 @@ class RecetteForm extends Component implements HasForms
                 Section::make("Présentation")
                     ->schema([
                         FileUpload::make('image')
-                            ->image()
-                            ->imageEditor(),
-                        FileUpload::make('video'),
+                            ->disk('local')
+                            ->directory('photos-recettes')
+                            ->visibility('public'),
                             //->image()
-                            //->imageEditor(),
+                            //->imageEditor()
+                            //->storeFileNamesIn('image'),
+                        FileUpload::make('video'),
                     ])->columns(2),
                 Section::make("Timing")
                     ->description("Les différents timings pour votre reccette")
@@ -84,7 +95,16 @@ class RecetteForm extends Component implements HasForms
                             ->hintColor('primary'),
                     ])->columns(2),
                 RichEditor::make('description'),
-                //Textarea::make('description'),
+                Section::make("Résume")
+                    ->description("")
+                    ->schema([
+                        TextInput::make('nbCalories')
+                            ->label("Nombre de calories")
+                            ->hint("En kcal")
+                            ->hintColor('primary'),
+                        TextInput::make('difficulte')
+                        ->label("Difficulté")
+                    ])->columns(2),
                 DateTimePicker::make('created_at')->label("Date de création")->disabled(),
                 DateTimePicker::make('updated_at')->label("Date de mise à jour")->disabled(),
                 Section::make("Les étapes")
@@ -94,27 +114,33 @@ class RecetteForm extends Component implements HasForms
                             ->schema([
                                 Textarea::make('description')->label('Etape')
                             ])
-                            //->reorderable(true)
-                            //->collapsible()
                             ->cloneable()
                             ->reorderableWithButtons()
                             ->addActionLabel('Ajouter une tâche')
-                            ->orderColumn('sort')
+                            ->orderColumn('sort'),
+                        
                     ])
             ]);
     }
 
-    public function submit()
+    protected function getFormModel(): Etape
+    {
+        return $this->recette->etapes();
+    }
+
+    public function submit(Request $request)
     {
         $this->validate();
 
+        //$file = Storage::disk('local')->put('recettes', $request->file('image'));
         Recette::query()
             ->whereId($this->recetteId)
             ->update([
                 'nom' => $this->nom,
                 'description' => $this->description,
                 'preparationTime' => $this->preparationTime,
-                'cookingTime' => $this->cookingTime
+                'cookingTime' => $this->cookingTime,
+                'image' => $this->image
             ]);
     }
 

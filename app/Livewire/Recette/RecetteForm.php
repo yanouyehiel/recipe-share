@@ -76,11 +76,9 @@ class RecetteForm extends Component implements HasForms
                         FileUpload::make('image')
                             ->disk('local')
                             ->directory('photos-recettes')
-                            ->visibility('public'),
-                            //->image()
-                            //->imageEditor()
-                            //->storeFileNamesIn('image'),
-                        FileUpload::make('video'),
+                            ->visibility('public')
+                            ->nullable(),
+                        FileUpload::make('video')->nullable(),
                     ])->columns(2),
                 Section::make("Timing")
                     ->description("Les différents timings pour votre reccette")
@@ -105,8 +103,12 @@ class RecetteForm extends Component implements HasForms
                         TextInput::make('difficulte')
                         ->label("Difficulté")
                     ])->columns(2),
-                DateTimePicker::make('created_at')->label("Date de création")->disabled(),
-                DateTimePicker::make('updated_at')->label("Date de mise à jour")->disabled(),
+                Section::make("Date")
+                        ->description("")
+                        ->schema([
+                            DateTimePicker::make('created_at')->label("Date de création")->disabled(),
+                            DateTimePicker::make('updated_at')->label("Date de mise à jour")->disabled(),
+                        ])->columns(2),
                 Section::make("Les étapes")
                     ->description("Ci-dessous les différentes étapes de préparation de cette recette")
                     ->schema([
@@ -116,24 +118,18 @@ class RecetteForm extends Component implements HasForms
                             ])
                             ->cloneable()
                             ->reorderableWithButtons()
-                            ->addActionLabel('Ajouter une tâche')
+                            ->addActionLabel('Ajouter une étape')
                             ->orderColumn('sort'),
                         
                     ])
             ]);
     }
 
-    protected function getFormModel(): Etape
-    {
-        return $this->recette->etapes();
-    }
-
     public function submit(Request $request)
     {
         $this->validate();
 
-        //$file = Storage::disk('local')->put('recettes', $request->file('image'));
-        Recette::query()
+        /*Recette::query()
             ->whereId($this->recetteId)
             ->update([
                 'nom' => $this->nom,
@@ -141,7 +137,15 @@ class RecetteForm extends Component implements HasForms
                 'preparationTime' => $this->preparationTime,
                 'cookingTime' => $this->cookingTime,
                 'image' => $this->image
-            ]);
+            ]);*/
+        
+        $this->recette->update([
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'preparationTime' => $this->preparationTime,
+            'cookingTime' => $this->cookingTime,
+            'image' => $this->image
+        ]);
     }
 
     public function rules(): array

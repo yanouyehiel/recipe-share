@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('cookingTime');
             $table->integer('nbCalories');
             $table->string('difficulte');
+            $table->string('nbPersonnes');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

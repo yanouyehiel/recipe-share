@@ -19,4 +19,13 @@ class ShowRecetteController extends Controller
             'recette' => $recette
         ]);
     }
+
+    public function recette($idRecette)
+    {
+        $recette = Recette::find((int) $idRecette);
+
+        return view('recette', [
+            'recette' => $recette
+        ]);
+    }
 }

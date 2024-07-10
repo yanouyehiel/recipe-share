@@ -13,7 +13,7 @@
 
         <link rel="icon" href="../../../public/images/recipe-logo.png">
         <link rel="shortcut icon" href="../../../public/images/recipe-logo.png">
-        
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Scripts -->
         @filamentStyles
         @vite('resources/css/app.css')

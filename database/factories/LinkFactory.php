@@ -19,7 +19,7 @@ class LinkFactory extends Factory
     {
         return [
             'token' => Str::random(),
-            'template' => 'example'
+            'template' => 'example',
         ];
     }
 }

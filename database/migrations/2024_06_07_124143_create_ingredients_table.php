@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->integer('calorie')->nullable();
-            $table->string('type')->nullable();
+            $table->foreignId('recette_id')->constrained()->cascadeOnDelete();
+            
             $table->timestamps();
         });
     }

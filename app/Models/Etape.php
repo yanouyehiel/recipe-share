@@ -18,6 +18,11 @@ class Etape extends Model
         'description', 'sort', 'recette_id'
     ];
 
+    protected function casts(): array
+    {
+        return ['description' => 'array',];
+    }
+
     public function recette(): BelongsTo
     {
         return $this->belongsTo(Recette::class);

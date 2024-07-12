@@ -28,4 +28,17 @@ class ShowRecetteController extends Controller
             'recette' => $recette
         ]);
     }
+
+    public function modify($idRecette)
+    {
+        $recette = Recette::find((int) $idRecette);
+
+        if ($recette->user_id == auth()->user()->id) {
+            return view('recette.show', [
+                'recette' => $recette
+            ]);
+        } else {
+            return redirect("recettes");
+        }
+    }
 }

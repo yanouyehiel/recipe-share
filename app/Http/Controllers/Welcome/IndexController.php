@@ -24,4 +24,8 @@ class IndexController extends Controller
             'recettes' => $recettes
         ]);
     }
+    public function addRecette()
+    {
+        return view('recette.add-recette');
+    }
 }

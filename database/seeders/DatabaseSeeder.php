@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Commentaire;
 use App\Models\Etape;
+use App\Models\Ingredient;
 use App\Models\Link;
 use App\Models\Recette;
 use App\Models\User;
@@ -23,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'azerty123'
         ]);
 
-        $recette = Recette::factory()->create([
+        $recette = Recette::factory(4)->create([
             'user_id' => $user->id
         ]);
 
@@ -33,10 +34,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Etape::factory(5)->create([
-            'recette_id' => $recette->id
+            'recette_id' => $recette->id,
+            'sort' => 1
         ]);
 
         Link::factory(3)->create([
+            'recette_id' => $recette->id
+        ]);
+
+        Ingredient::factory(10)->create([
             'recette_id' => $recette->id
         ]);
     }

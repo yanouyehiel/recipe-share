@@ -7,12 +7,14 @@
                 </header>
 
                 <div class="container mx-2 p-4">
-                    <div class="grid gap-1 gap-y-8 md:grid-cols-2 lg:grid-cols-1 mb-16">
+                    <div class="grid gap-3 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
                         @foreach ($recettes as $recette)
-                            <div class="bg-white rounded-md overflow-hidden relative shadow-md flex">
-                                <div><img class="w-full" src="{{ asset($recette->image) }}" alt="Recipe Title"></div>
+                            <div class="bg-white rounded-md overflow-hidden relative shadow-md">
+                                <div><img class="w-full h-60" src="{{ asset("/storage/".$recette->image) }}" alt="Recipe Title"></div>
                                 <div class="p-4">
-                                    <h2 class="text-2xl text-green-400">{{ $recette->nom }}</h2>
+                                    <h2 class="text-2xl text-green-400">
+                                        <a href="recette/{{ $recette->id }}">{{ $recette->nom }}</a>
+                                    </h2>
                                     <div class="flex justify-between mt-4 mb-4 text-gray-500">
                                         <div class="flex items-center">
                                             <img class="h-6 w-6" src="{{ asset("/images/cooking-time.png") }}" alt="cookingTime_icon">
@@ -31,10 +33,14 @@
                                     </div>
                                     <p class="mb-4 text-gray-500">{{ $recette->description }}</p>
                                     <div class="flex">
-                                        <a href="recette/{{ $recette->id }}" class="text-white text-center bg-green-400 p-4 rounded-md w-full uppercase">Voir la recette</a>
+                                        <x-secondary-button
+                                            x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'share-recipe')"
+                                            class="text-black text-center bg-green-400 p-4 rounded-md uppercase"
+                                        >{{ __('Partager') }}</x-secondary-button>
                                     </div>
                                 </div>
-                                <div class="absolute top-0 right-0 mt-4 mr-4 bg-green-400 text-white rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase">
+                                <div class="absolute top-2 right-0 mt-4 mr-4 bg-green-400 text-white rounded-full pt-1 pb-1 pl-4 pr-5 text-xs uppercase">
                                     <span>{{ $recette->difficulte }}</span>
                                 </div>
                             </div>
@@ -42,6 +48,26 @@
                         @endforeach
                     </div>
                 </div>
+
+                <x-modal name="share-recipe" focusable>
+                    <div class="p-6">
+                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                            {{ __('Voulez-vous partager cette recette sur les réseaux sociaux ?') }}
+                        </h2>
+
+                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                            {{ __('Copiez le lien de partage ci-dessous') }}
+                        </p>
+
+                        
+
+                        <div class="mt-6 flex justify-end">
+                            <x-secondary-button x-on:click="$dispatch('close')">
+                                {{ __('Fermer') }}
+                            </x-secondary-button>
+                        </div>
+                    </div>
+                </x-modal>
 
                 <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                     {{-- Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) --}}

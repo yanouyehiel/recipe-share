@@ -20,8 +20,10 @@ Route::view('dashboard', 'dashboard')
 Route::middleware('auth')->group(function() {
     Route::get('recettes', ShowListRecetteController::class)->name('recettes');
     Route::get('recette/{recette:id}', ShowRecetteController::class)->name('recette');
+    Route::get('recette/{recette:id}/modify', [ShowRecetteController::class, 'modify'])->name('modify');
     Route::get('links', ShowController::class)->name('links');
     Route::get('links/{link:token}', TemplateController::class)->name('template');
+    Route::get('recette/add', [IndexController::class, 'addRecette'])->name('recette/add');
 });
 
 Route::get('recette/{recette:id}', [ShowRecetteController::class, 'recette'])->name('recette');

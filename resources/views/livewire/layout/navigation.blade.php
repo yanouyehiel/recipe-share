@@ -90,7 +90,9 @@ new class extends Component
                         </x-nav-link>
                     @endif
                 @endauth
-                <x-primary-button>Ajouter une recette</x-primary-button>
+                <x-nav-link :href="route('recette/add')" wire:navigate>
+                    <x-primary-button>Ajouter une recette</x-primary-button>
+                </x-nav-link>
             </div>
 
             <!-- Hamburger -->

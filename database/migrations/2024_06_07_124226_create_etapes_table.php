@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('etapes', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->integer('sort')->nullable();
             $table->foreignId('recette_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

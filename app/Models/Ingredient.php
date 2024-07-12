@@ -10,4 +10,9 @@ class Ingredient extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $fillable = ['nom'];
+    protected function casts(): array
+    {
+        return ['nom' => 'array',];
+    }
 }

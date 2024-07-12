@@ -1,148 +1,115 @@
 <x-app-layout>
-    <div>
-        <article
-        class="bg-[#fff] md:my-[5rem] md:py-8 pb-8 md:rounded-xl md:max-w-screen-md"
-        >
-        <div class="flex justify-center">
-            <img
-                src="{{ asset($recette->image) }}"
-                alt="Photo of an omelette with vegetables on a plate"
-                class="md:max-w-[90%] md:mx-auto md:rounded-xl"
-                width="500px"
-                height="500px"
-            />
-        </div>
-        <div class="px-8 font-outfit text-wenge-brown">
-            <h1 class="font-fancy text-4xl mt-8 text-dark-charcoal">{{ $recette->nom }}</h1>
-            <p class="mt-6">{{ $recette->description }}</p>
-            <article class="bg-rose-white mt-6 p-5 rounded-xl">
-            <h2 class="text-dark-raspberry text-xl font-semibold ml-2">
-                Preparation time
-            </h2>
-            <ul class="list-disc mt-3 ml-8 text-lg marker:text-dark-raspberry">
-                <li class="pl-3">
-                <p>
-                    <span class="font-semibold">Total: </span>Approximately 10
-                    minutes
-                </p>
-                </li>
-                <li class="mt-3 pl-3">
-                <p><span class="font-semibold">Preparation: </span>5 minutes</p>
-                </li>
-                <li class="mt-3 pl-3">
-                <p><span class="font-semibold">Cooking: </span>5 minutes</p>
-                </li>
-            </ul>
-            </article>
-            <div class="mt-8">
-            <h3 class="font-fancy text-3xl text-nutmeg">Ingredients</h3>
-            <ul
-                class="list-disc marker:text-nutmeg mt-4 ml-6 text-wenge-brown marker:align-middle"
-            >
-                <li class="pl-4">2-3 large eggs</li>
-                <li class="pl-4 mt-2">Salt, to taste</li>
-                <li class="pl-4 mt-2">Pepper, to taste</li>
-                <li class="pl-4 mt-2">1 tablespoon of butter or oil</li>
-                <li class="pl-4 mt-2">
-                Optional fillings: cheese, diced vegetables, cooked meats, herbs
-                </li>
-            </ul>
-            </div>
-            <div class="w-full h-px bg-light-gray mx-auto mt-8"></div>
-            <div class="mt-8">
-            <h3 class="font-fancy text-3xl text-nutmeg">Instructions</h3>
-            <ol
-                class="marker:text-nutmeg marker:font-semibold marker:font-outfit list-decimal mt-4 ml-6"
-            >
-                <li class="pl-4">
-                <p>
-                    <span class="font-bold">Beat the eggs: </span>In a bowl, beat
-                    the eggs with a pinch of salt and pepper until they are well
-                    mixed. You can add a tablespoon of water or milk for a
-                    fluffier texture.
-                </p>
-                </li>
-                <li class="pl-4 mt-2">
-                <p>
-                    <span class="font-bold">Heat the pan: </span>Place a non-stick
-                    frying pan over medium heat and add butter or oil.
-                </p>
-                </li>
-                <li class="pl-4 mt-2">
-                <p>
-                    <span class="font-bold">Cook the omelette: </span>Once the
-                    butter is melted and bubbling, pour in the eggs. Tilt the pan
-                    to ensure the eggs evenly coat the surface.
-                </p>
-                </li>
-                <li class="pl-4 mt-2">
-                <p>
-                    <span class="font-bold">Add fillings (optional): </span>When
-                    the eggs begin to set at the edges but are still slightly
-                    runny in the middle, sprinkle your chosen fillings over one
-                    half of the omelette.
-                </p>
-                </li>
-                <li class="pl-4 mt-2">
-                <p>
-                    <span class="font-bold">Fold and serve: </span>As the omelette
-                    continues to cook, carefully lift one edge and fold it over
-                    the fillings. Let it cook for another minute, then slide it
-                    onto a plate.
-                </p>
-                </li>
-                <li class="pl-4 mt-2">
-                <p>
-                    <span class="font-bold">Enjoy: </span>Serve hot, with
-                    additional salt and pepper if needed.
-                </p>
-                </li>
-            </ol>
-            </div>
-            <div class="w-full h-px bg-light-gray mx-auto mt-8"></div>
-            <div class="mt-8">
-            <h3 class="font-fancy text-3xl text-nutmeg">Nutrition</h3>
-            <p class="mt-4">
-                The table below shows nutritional values per serving without the
-                additional fillings.
-            </p>
-            <ul class="mt-6">
-                <li>
-                <div class="flex">
-                    <p class="ml-8 text-lg w-full mr-auto">Calories</p>
-                    <p class="font-bold text-nutmeg text-lg w-full mr-auto">
-                    277kcal
-                    </p>
-                </div>
-                <div class="w-full h-px bg-light-gray mx-auto mt-3"></div>
-                </li>
-                <li>
-                <div class="flex mt-3">
-                    <p class="ml-8 text-lg w-full mr-auto">Carbs</p>
-                    <p class="font-bold text-nutmeg text-lg w-full mr-auto">0g</p>
-                </div>
-                <div class="w-full h-px bg-light-gray mx-auto mt-3"></div>
-                </li>
-                <li>
-                <div class="flex mt-3">
-                    <p class="ml-8 text-lg w-full mr-auto">Protein</p>
-                    <p class="font-bold text-nutmeg text-lg w-full mr-auto">
-                    20g
-                    </p>
-                </div>
-                <div class="w-full h-px bg-light-gray mx-auto mt-3"></div>
-                </li>
-                <li>
-                <div class="flex mt-3">
-                    <p class="ml-8 text-lg w-full mr-auto">Fat</p>
-                    <p class="font-bold text-nutmeg text-lg w-full mr-auto">
-                    22g
-                    </p>
-                </div>
-                </li>
-            </ul>
-            </div>
-        </div>
-        </article>
+  <div class="bg-white md:w-1/2 md:m-auto md:pt-5 md:rounded-lg md:mt-6">
+    <div class="md:mx-5">
+      <img class="md:rounded-md md:m-auto h-80 w-full" src="{{ asset($recette->image) }}" alt="Simple Omelette Recipe">
+    </div>  
+    
+    <h1 class="font-young-serif text-3xl pt-8 px-5 pb-5 text-dark_charcoal">{{ $recette->nom }}</h1>
+
+    <p class="font-outfit text-sm px-5 pb-6 md:text-base text-dark_charcoal">{{ $recette->description }}</p>
+
+    <div class="bg-rose_white mx-5 px-5 py-2.5 mb-6 rounded-lg">
+      <p class="text-dark_raspberry font-bold text-base md:text-lg">Temps de préparation</p>
+
+      <ul class="mt-3 mx-1 space-y-2 text-dark_charcoal">
+        <li class="text-sm md:text-base flex items-center gap-3">
+          <p class="inline text-xl text-wenge_brown">•</p>
+          <div>
+            <span class="font-bold text-wenge_brown inline">Total:</span>
+            <p class="inline">{{ $recette->preparationTime + $recette->cookingTime }} minutes</p>
+          </div>
+        </li>
+
+        <li class="text-sm md:text-base flex items-center gap-3">
+          <p class="inline text-xl text-wenge_brown">•</p>
+          <div>
+            <span class="font-bold text-wenge_brown inline">Préparation:</span>
+            <p class="inline">{{ $recette->preparationTime }} minutes</p>
+          </div>
+        </li>
+
+        <li class="text-sm md:text-base flex items-center gap-3">
+          <p class="inline text-xl text-wenge_brown">•</p>
+          <div>
+            <span class="font-bold text-wenge_brown inline">Cuisson:</span>
+            <p class="inline">{{ $recette->cookingTime }} minutes</p>
+          </div>
+        </li>
+      </ul>
     </div>
+  
+
+    <h2 class="text-nutmeg font-young-serif text-2xl mx-5 mb-3">Ingrédients</h2>
+
+    <ul class="mx-5 space-y-2 text-dark_charcoal">
+        @foreach ($recette->ingredients as $ingredient)
+          <div class="flex items-center">
+            <li class="text-sm md:text-base flex items-center gap-3 ml-1">
+              <p class="inline text-xl">•</p>
+              <p class="inline">{{ $ingredient->nom }}</p>
+            </li>
+            <p class="inline">Nombre de calories : {{ $ingredient->calorie }}kcal</p>
+          </div>
+        @endforeach
+    </ul>
+  
+    <hr class="mx-5 my-8">
+
+    <h2 class="text-nutmeg font-young-serif text-2xl mx-5 mb-3">Instructions</h2>
+
+    <ul class="mx-5 space-y-2 text-dark_charcoal">
+      @foreach ($recette->etapes()->get() as $key => $etape)
+        <li class="text-sm md:text-base list-none flex gap-3">
+          <p class="inline font-bold text-nutmeg ml-1">{{ $key + 1 }}.</p>
+          <div>
+            <p class="inline">{{ $etape->description }}</p>
+          </div>
+        </li>
+      @endforeach
+    </ul>
+
+    <hr class="mx-5 my-8">
+
+    <h2 class="text-nutmeg font-young-serif text-2xl mx-5 mb-3">Nutrition</h2>
+
+    <ul class="mx-5 mb-5 space-y-2 text-dark_charcoal">
+      <li class="text-sm md:text-base leading-5 pb-3 border-b grid grid-cols-2">
+        <p class="mx-6">Calories</p>
+        <span class="font-bold text-nutmeg">{{ $recette->nbCalories }}kcal</span>
+      </li>
+      <li class="text-sm md:text-base leading-5 pb-3 border-b grid grid-cols-2">
+        <p class="mx-6">Glucides</p>
+        <span class="font-bold text-nutmeg">0g</span>
+      </li>
+      <li class="text-sm md:text-base leading-5 pb-3 border-b grid grid-cols-2">
+        <p class="mx-6">Protéines</p>
+        <span class="font-bold text-nutmeg">20g</span>
+      </li>
+      <li class="text-sm md:text-base leading-5 pb-8 grid grid-cols-2">
+        <p class="mx-6">Graisse</p>
+        <span class="font-bold text-nutmeg">22g</span></li>
+    </ul>
+  </div>
+
+  <div class="bg-white md:w-1/2 md:m-auto md:pt-5 md:rounded-lg py-12">
+    <h2 class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">
+      {{ __("Les commentaires") }}
+    </h2>
+    
+    @if (count($recette->commentaires()->get()) > 0)
+      @foreach ($recette->commentaires()->get() as $commentaire)
+        <div class="flex justify-between mt-4 px-12">
+          <span>{{ $commentaire->user()->get()[0]->name }}</span>
+          <p class="font-semibold text-base text-gray-800 dark:text-gray-200">{{ $commentaire->comment }}</p>
+          <span>{{ $commentaire->created_at->format('d M y h:i:s')}}</span>
+        </div>
+      @endforeach
+    @else
+      <p class="text-center text-base text-gray-800 dark:text-gray-200 mt-4">Aucun commentaire enregistré</p>
+    @endif
+    
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <livewire:recette.add-comment :recette="$recette" />
+    </div>
+  </div>
 </x-app-layout>

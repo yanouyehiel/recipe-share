@@ -105,7 +105,7 @@ class RecetteForm extends Component implements HasForms
                             ->default($this->recette->image)
                             ->afterStateUpdated(
                                 function ($state, $set, $get, $model) {
-                                    $this->pathimage = $state->store('uploads/images');
+                                    $this->pathimage = $state->store('public/uploads/images');
                                 }
                             ),
                         TextInput::make('video')
@@ -176,13 +176,13 @@ class RecetteForm extends Component implements HasForms
     public function submit(Request $request)
     {
         $this->validate();
-        
+        $imageUrlWithoutPublic = str_replace('public/', '', $this->pathimage);
         $this->recette->update([
             'nom' => $this->nom,
             'description' => $this->description,
             'preparationTime' => $this->preparationTime,
             'cookingTime' => $this->cookingTime,
-            'image' => $this->pathimage,
+            'image' => $imageUrlWithoutPublic,
             'nbPersonnes' => $this->nbPersonnes,
             'nbCalories' => $this->nbCalories,
             'difficulte' => $this->difficulte

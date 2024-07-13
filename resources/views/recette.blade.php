@@ -1,7 +1,7 @@
 <x-app-layout>
   <div class="bg-white md:w-1/2 md:m-auto md:pt-5 md:rounded-lg md:mt-6">
     <div class="md:mx-5">
-      <img class="md:rounded-md md:m-auto h-80 w-full" src="{{ asset($recette->image) }}" alt="Simple Omelette Recipe">
+      <img class="md:rounded-md md:m-auto h-80 w-full" src="{{ asset("/storage/".$recette->image) }}" alt="Recipe">
     </div>  
     
     <h1 class="font-young-serif text-3xl pt-8 px-5 pb-5 text-dark_charcoal">{{ $recette->nom }}</h1>

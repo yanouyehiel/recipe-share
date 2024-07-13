@@ -1,12 +1,12 @@
 <x-app-layout>
   <div class="bg-white md:w-1/2 md:m-auto md:pt-5 md:rounded-lg md:mt-6">
     <div class="md:mx-5">
-      <img class="md:rounded-md md:m-auto h-80 w-full" src="{{ asset("/storage/".$recette->image) }}" alt="Recipe">
+      <img class="md:rounded-md md:m-auto h-80 w-full" src="{{ asset("/storage/".$recette?->image) }}" alt="Recipe">
     </div>  
     
-    <h1 class="font-young-serif text-3xl pt-8 px-5 pb-5 text-dark_charcoal">{{ $recette->nom }}</h1>
+    <h1 class="font-young-serif text-3xl pt-8 px-5 pb-5 text-dark_charcoal">{{ $recette?->nom }}</h1>
 
-    <p class="font-outfit text-sm px-5 pb-6 md:text-base text-dark_charcoal">{{ $recette->description }}</p>
+    <p class="font-outfit text-sm px-5 pb-6 md:text-base text-dark_charcoal">{{ $recette?->description }}</p>
 
     <div class="bg-rose_white mx-5 px-5 py-2.5 mb-6 rounded-lg">
       <p class="text-dark_raspberry font-bold text-base md:text-lg">Temps de préparation</p>
@@ -16,7 +16,7 @@
           <p class="inline text-xl text-wenge_brown">•</p>
           <div>
             <span class="font-bold text-wenge_brown inline">Total:</span>
-            <p class="inline">{{ $recette->preparationTime + $recette->cookingTime }} minutes</p>
+            <p class="inline">{{ $recette?->preparationTime + $recette?->cookingTime }} minutes</p>
           </div>
         </li>
 
@@ -24,7 +24,7 @@
           <p class="inline text-xl text-wenge_brown">•</p>
           <div>
             <span class="font-bold text-wenge_brown inline">Préparation:</span>
-            <p class="inline">{{ $recette->preparationTime }} minutes</p>
+            <p class="inline">{{ $recette?->preparationTime }} minutes</p>
           </div>
         </li>
 
@@ -32,7 +32,7 @@
           <p class="inline text-xl text-wenge_brown">•</p>
           <div>
             <span class="font-bold text-wenge_brown inline">Cuisson:</span>
-            <p class="inline">{{ $recette->cookingTime }} minutes</p>
+            <p class="inline">{{ $recette?->cookingTime }} minutes</p>
           </div>
         </li>
       </ul>
@@ -42,7 +42,7 @@
     <h2 class="text-nutmeg font-young-serif text-2xl mx-5 mb-3">Ingrédients</h2>
 
     <ul class="mx-5 space-y-2 text-dark_charcoal">
-        @foreach ($recette->ingredients as $ingredient)
+        @foreach ($recette?->ingredients as $ingredient)
           <div class="flex items-center">
             <li class="text-sm md:text-base flex items-center gap-3 ml-1">
               <p class="inline text-xl">•</p>

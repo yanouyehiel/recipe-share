@@ -18,11 +18,11 @@
                                     <div class="flex justify-between mt-4 mb-4 text-gray-500">
                                         <div class="flex items-center">
                                             <img class="h-6 w-6" src="{{ asset("/images/cooking-time.png") }}" alt="cookingTime_icon">
-                                            <span class="ml-1 lg:text-xl">{{ $recette->cookingTime }}m</span>
+                                            <span class="ml-1 lg:text-lg">{{ $recette->cookingTime }}minutes</span>
                                         </div>
                                         <div class="flex items-center">
                                             <img class="h-6 w-6" src="{{ asset("/images/bake.png") }}" alt="preparationTime_icon">
-                                        <span class="ml-1 lg:text-xl">{{ $recette->preparationTime}}m</span>
+                                        <span class="ml-1 lg:text-lg">{{ $recette->preparationTime}}minutes</span>
                                         </div>
                                         <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -44,30 +44,31 @@
                                     <span>{{ $recette->difficulte }}</span>
                                 </div>
                             </div>
-                        
                         @endforeach
+
+                        <x-modal name="share-recipe" focusable>
+                            <div class="p-6">
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    {{ __('Voulez-vous partager cette recette sur les réseaux sociaux ?') }}
+                                </h2>
+        
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ __('Copiez le lien de partage ci-dessous') }}
+                                </p>
+        
+                                <p class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    {{ env('APP_URL').'/recette/'.$recette->id }}
+                                </p>
+        
+                                <div class="mt-6 flex justify-end">
+                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                        {{ __('Fermer') }}
+                                    </x-secondary-button>
+                                </div>
+                            </div>
+                        </x-modal>
                     </div>
                 </div>
-
-                <x-modal name="share-recipe" focusable>
-                    <div class="p-6">
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Voulez-vous partager cette recette sur les réseaux sociaux ?') }}
-                        </h2>
-
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                            {{ __('Copiez le lien de partage ci-dessous') }}
-                        </p>
-
-                        
-
-                        <div class="mt-6 flex justify-end">
-                            <x-secondary-button x-on:click="$dispatch('close')">
-                                {{ __('Fermer') }}
-                            </x-secondary-button>
-                        </div>
-                    </div>
-                </x-modal>
 
                 <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                     {{-- Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) --}}
